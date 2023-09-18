@@ -119,4 +119,7 @@ def inference(event) -> Union[str, Generator[str, None, None]]:
         output_text = generator.generate_simple(prompt, max_new_tokens = max_new_tokens)
         yield output_text[len(prompt):]
 
-runpod.serverless.start({"handler": inference})
+runpod.serverless.start({
+    "handler": inference,
+    "return_aggregate_stream": True
+})
