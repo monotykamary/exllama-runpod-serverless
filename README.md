@@ -18,7 +18,7 @@ This Docker image runs a Llama model on a serverless RunPod instance using the o
     | Template Field | Value |
     | --- | --- |
     | Template Name | `exllama-runpod-serverless` |
-    | Container Image | `hommayushi3/exllama-runpod-serverless:latest` |
+    | Container Image | `monotykamary/exllama-runpod-serverless:latest` |
     | Container Disk | A size large enough to store your libraries + your desired model in 4bit. |
 
     - Container Disk Size Guide:
@@ -120,12 +120,12 @@ def stream_output(task_id, stream=False):
                         sys.stdout.write(new_output[len(previous_output):])
                         sys.stdout.flush()
                     previous_output = new_output
-                
+
                 if data.get('status') == 'COMPLETED':
                     if not stream:
                         return previous_output
                     break
-                    
+
             elif response.status_code >= 400:
                 print(response)
             # Sleep for 0.1 seconds between each request
@@ -133,7 +133,7 @@ def stream_output(task_id, stream=False):
     except Exception as e:
         print(e)
         cancel_task(task_id)
-    
+
 
 def cancel_task(task_id):
     url = f"https://api.runpod.ai/v2/{endpoint_id}/cancel/{task_id}"
